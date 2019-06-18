@@ -17,6 +17,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adfectus.ImGuiNet", "Adfect
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adfectus.Steam", "Adfectus.Steam\Adfectus.Steam.csproj", "{54D8C646-90D0-4718-9CC7-55701778DB8B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adfectus.Platform.Android", "Adfectus.Platform.Android\Adfectus.Platform.Android.csproj", "{29D8B382-F96E-413F-B7C9-269FCC07251A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adfectus.Platform.Android.ExecTest", "Adfectus.Platform.Android.ExecTest\Adfectus.Platform.Android.ExecTest.csproj", "{40A84290-23E6-4D77-AA5F-23DC8BFD5C96}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +53,16 @@ Global
 		{54D8C646-90D0-4718-9CC7-55701778DB8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54D8C646-90D0-4718-9CC7-55701778DB8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54D8C646-90D0-4718-9CC7-55701778DB8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29D8B382-F96E-413F-B7C9-269FCC07251A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29D8B382-F96E-413F-B7C9-269FCC07251A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29D8B382-F96E-413F-B7C9-269FCC07251A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29D8B382-F96E-413F-B7C9-269FCC07251A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40A84290-23E6-4D77-AA5F-23DC8BFD5C96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40A84290-23E6-4D77-AA5F-23DC8BFD5C96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40A84290-23E6-4D77-AA5F-23DC8BFD5C96}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{40A84290-23E6-4D77-AA5F-23DC8BFD5C96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40A84290-23E6-4D77-AA5F-23DC8BFD5C96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40A84290-23E6-4D77-AA5F-23DC8BFD5C96}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
