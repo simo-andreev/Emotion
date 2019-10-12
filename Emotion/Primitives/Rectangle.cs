@@ -447,51 +447,71 @@ namespace Emotion.Primitives
             distance = 0f;
             float maxValue = float.MaxValue;
 
+            // TODO - Simo Andreev - 12.10.2019 - shouldn;t this also check that the ray direction is 'towards' the rect ?
+            // If the X Direction of the Ray2D is ~approximately~ zero - direction is along X axis
             if (Math.Abs(ray.Direction.X) < 1E-06f)
             {
+                // check if said Ray X axis is within rect.Start.X to rect.End.X (incl) 
                 if (ray.Start.X < X || ray.Start.X > X + Width)
                     return false;
             }
             else
             {
-                float num11 = 1f / ray.Direction.X;
-                float num8 = (X - ray.Start.X) * num11;
-                float num7 = (X + Width - ray.Start.X) * num11;
-                if (num8 > num7)
+                // Get the reciprocal of the X direction
+                // It corresponds to the value of Y translation, for which the X value along the Ray would increase by 1.0
+                // e.g. - if Direction.X = 4 => directionReciprocal = 0.25 => when translating a point along the ray, every Point.Y += 0.25 would change point Point.X += 1
+                float reciprocal = 1f / ray.Direction.X;
+                float yDistance1 = (X - ray.Start.X) * reciprocal; // Calculate the distance over the Y axis, for which the Ray would intersect this.Start.X
+                float yDistance2 = (X + Width - ray.Start.X) * reciprocal; // Calculate the distance over the Y axis, for which the Ray would intersect `this.End.X`
+                
+                if (yDistance1 > yDistance2)
                 {
-                    float num14 = num8;
-                    num8 = num7;
-                    num7 = num14;
+                    // Swap so that the lower distance is always in yDistance1 (note*: if distance is negative -> lower value is actually longer distance)
+                    float swap = yDistance1;
+                    yDistance1 = yDistance2;
+                    yDistance2 = swap;
                 }
 
-                distance = Math.Max(num8, distance);
-                maxValue = Math.Min(num7, maxValue);
+                distance = Math.Max(yDistance1, distance);
+                maxValue = Math.Min(yDistance2, maxValue);
+                
+                // If the shorter distance (yDistance1) is (abouve float.MaxValue | abouve yDistance2) -> Ray does not validly intersect. 
                 if (distance > maxValue)
                     return false;
             }
 
+            // If the X Direction of the Ray2D is ~approximately~ zero - direction is along X axis
             if (Math.Abs(ray.Direction.Y) < 1E-06f)
             {
-                if (ray.Start.Y < Y || ray.Start.Y > Y + Height) return false;
+                // TODO - Simo Andreev - 12.10.2019 - shouldn;t this also check that the ray direction is 'towards' the rect ?
+                // check if said Ray Y axis is within rect.Start.X to rect.End.X (incl) 
+                if (ray.Start.Y < Y || ray.Start.Y > Y + Width)
+                    return false;
             }
             else
             {
-                float num10 = 1f / ray.Direction.Y;
-                float num6 = (Y - ray.Start.Y) * num10;
-                float num5 = (Y + Height - ray.Start.Y) * num10;
-                if (num6 > num5)
+                // Get the reciprocal of the Y direction
+                // It corresponds to the value of X translation, for which the Y value along the Ray would increase by 1.0
+                // e.g. - if Direction.Y = 4 => directionReciprocal = 0.25 => when translating a point along the ray, every Point.X += 0.25 would change point Point.Y += 1
+                float reciprocal = 1f / ray.Direction.Y;
+                float yDistance1 = (Y - ray.Start.Y) * reciprocal; // Calculate the distance over the X axis, for which the Ray would intersect this.Start.Y
+                float yDistance2 = (Y + Width - ray.Start.Y) * reciprocal; // Calculate the distance over the X axis, for which the Ray would intersect `this.End.Y`
+                
+                if (yDistance1 > yDistance2)
                 {
-                    float num13 = num6;
-                    num6 = num5;
-                    num5 = num13;
+                    // Swap so that the shorter distance is always in yDistance1 (note*: if distance is negative -> lower value is actually longer distance)
+                    float swap = yDistance1;
+                    yDistance1 = yDistance2;
+                    yDistance2 = swap;
                 }
 
-                distance = Math.Max(num6, distance);
-                maxValue = Math.Min(num5, maxValue);
+                distance = Math.Max(yDistance1, distance);
+                maxValue = Math.Min(yDistance2, maxValue);
+                
+                // If the shorter distance (yDistance1) is (abouve float.MaxValue | abouve yDistance2) -> Ray does not validly intersect. 
                 if (distance > maxValue)
                     return false;
             }
-
             return true;
         }
 
