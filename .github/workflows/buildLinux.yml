@@ -12,7 +12,8 @@ jobs:
     
     steps:
     - name: Pull, Build, and Run Tests
-    - run: work dir- $(pwd)
-    - run: echo user- ${{ inputs.username }}
-    - run: echo user- $(whoami)
-    - run: git clone https://github.com/simo-andreev/Emotion
+      run: |
+        work dir- $(pwd)
+        echo user- ${{ inputs.username }}
+        echo user- $(whoami)
+        git clone https://github.com/simo-andreev/Emotion
