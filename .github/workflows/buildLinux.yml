@@ -12,15 +12,7 @@ jobs:
     
     steps:
     - name: Pull, Build, and Run Tests
-      run: |
+      run: 
+        git clone https://github.com/simo-andreev/Emotion
         pwd
-        git pull
-        dotnet publish Tests -c DebugUnix64 -r linux-x64 -o Tests/bin/linux --self-contained true
-        cd ./Tests/bin/linux
-        ./Tests
-    - name: Upload Test Artifact
-      if: always()
-      uses: actions/upload-artifact@master
-      with:
-        name: Test Result Artifact
-        path: Tests/bin/linux/TestResults
+        echo user- ${{ inputs.username }}
