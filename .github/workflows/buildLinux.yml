@@ -16,4 +16,5 @@ jobs:
         echo work dir- $(pwd)
         echo user- ${{ inputs.username }}
         echo user- $(whoami)
-        git clone https://github.com/simo-andreev/Emotion
+        git fetch --all
+        git pull
