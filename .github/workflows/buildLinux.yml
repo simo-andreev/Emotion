@@ -13,12 +13,19 @@ jobs:
     steps:
     - name: Pull, Build, and Run Tests
       run: |
-        echo work dir- $(pwd)
+        export DISPLAY=:0.0
+        echo work_dir- $(pwd)
         echo user- $(whoami)
         echo displays- $(xrandr -q)
-        export DISPLAY=:0.0
         git fetch
         git pull
         dotnet publish Tests -c DebugUnix64 -r linux-x64 -o Tests/bin/linux --self-contained true
         cd ./Tests/bin/linux
         ./Tests
+        
+    - name: Upload Test Artifact
+      if: always()
+      uses: actions/upload-artifact@master
+      with:
+        name: Test Result Artifact
+        path: Tests/bin/linux/TestResults
