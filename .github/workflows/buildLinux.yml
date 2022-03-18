@@ -13,7 +13,7 @@ jobs:
     steps:
     - name: Pull, Build, and Run Tests
       run: |
-        work dir- $(pwd)
+        echo work dir- $(pwd)
         echo user- ${{ inputs.username }}
         echo user- $(whoami)
         git clone https://github.com/simo-andreev/Emotion
